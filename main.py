@@ -6,29 +6,32 @@ import cv2
 from picamera import PiCamera
 from time import sleep
 
-sensitivity = 3
-motionFlag = False
-chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
-chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-resX = 1920
-resY = 1080
-chunkX = resX / 4
-chunkY = resY / 2
-chunkPixs = chunkX * chunkY
-camera = PiCamera()
-camera.resolution = (resX, rexY)
-camera.framerate = (30)
-ph = 0
-vi = 0
-newDir = True
-dirNum = 1
-while (newDir):
-    if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
-        dirNum = dirNum + 1
-    else:
-        newDir = False
-        os.mkdir('/home/pi/Desktop/%s' % dirNum)
+
+
+def setup()
+    sensitivity = 3
+    motionFlag = False
+    chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
+    chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
+    lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
+    resX = 1920
+    resY = 1080
+    chunkX = resX / 4
+    chunkY = resY / 2
+    chunkPixs = chunkX * chunkY
+    camera = PiCamera()
+    camera.resolution = (resX, rexY)
+    camera.framerate = (30)
+    ph = 0
+    vi = 0
+    newDir = True
+    dirNum = 1
+    while (newDir):
+        if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
+            dirNum = dirNum + 1
+        else:
+            newDir = False
+            os.mkdir('/home/pi/Desktop/%s' % dirNum)
 
 def capture(type, length):
     if type == "photo":
@@ -74,6 +77,8 @@ def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
     os.mkdir('/home/pi/Desktop/Analysis')
 
+setup()
+resetCache()
 capture("photo")
 updateValues()
 if evaluateData():
