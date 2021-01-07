@@ -6,8 +6,6 @@ import cv2
 from picamera import PiCamera
 from time import sleep
 
-
-
 def setup()
     sensitivity = 3
     motionFlag = False
