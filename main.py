@@ -35,7 +35,7 @@ while (newDir):
 def capture(type, length):
     camera.resolution = (resX, resY)
     if type == "photo":
-        camera.capture('/home/pi/Desktop/%s/photo_%s' % dirNum % ph)
+        camera.capture('/home/pi/Desktop/%s/photo_%s' % dirNum, ph)
     if type == "video":
         camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi)
         sleep(length)
