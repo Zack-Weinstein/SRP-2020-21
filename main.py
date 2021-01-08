@@ -40,7 +40,6 @@ def capture(type, length):
         camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi)
         sleep(length)
         camera.stop_recording()
-    print("save %s" % ph)
 
 def updateValues():
     for data in range(0, 8):
@@ -96,8 +95,6 @@ while(True):
     evaluateData()
     if motionFlag:
         saveMedia("photo")
-        resetCache()
-    else:
-        resetCache()
+    resetCache()
     motionFlag = False
     #sleep(0.2)
