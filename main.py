@@ -57,10 +57,10 @@ def updateValues():
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
 
 def evaluateData():
+    global lastChunkData
     for i in range(0, 8):
         if chunkData[i] > lastChunkData[i] + sensitivity or chunkData[i] < lastChunkData[i] - sensitivity:
             return True
-        global lastChunkData
         lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
