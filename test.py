@@ -1,6 +1,6 @@
 from picamera import PiCamera
 camera = PiCamera()
-camera.resolution = (1920, 1080)
+camera.resolution = (256, 144)
 ph = 0
 
 while(True):
