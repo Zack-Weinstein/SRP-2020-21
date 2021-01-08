@@ -1,7 +1,5 @@
 # Main file (for now)
 
-#just testing
-
 import os
 import shutil
 import cv2
