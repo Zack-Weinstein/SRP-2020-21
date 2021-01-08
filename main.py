@@ -6,7 +6,7 @@ import cv2
 from picamera import PiCamera
 from time import sleep
 
-sensitivity = 10
+sensitivity = 0.1
 motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -58,7 +58,7 @@ def updateValues():
 
 def evaluateData():
     for i in range(0, 8):
-        if chunkData[i] > (lastChunkData[i] + sensitivity) or chunkData[i] < (lastChunkData[i] - sensitivity):
+        if chunkData[i] > (lastChunkData[i] + (sensitivity * lastChunkData[i])) or chunkData[i] < (lastChunkData[i] - (sensitivity * lastChunkData[i])):
             return True
         lastChunkData[i] = chunkData[i]
 
