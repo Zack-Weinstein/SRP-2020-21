@@ -37,7 +37,7 @@ def capture(type, length):
     if type == "photo":
         camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph)
     if type == "video":
-        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi
+        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi)
         sleep(length)
         camera.stop_recording()
     print("save %s" % ph)
