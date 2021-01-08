@@ -37,7 +37,7 @@ def capture(type, length):
     if type == "photo":
         camera.capture('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, ph))
     if type == "video":
-        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi)
+        camera.start_recording('/home/pi/Desktop/%s/video_%s.h264' % (dirNum, vi))
         sleep(length)
         camera.stop_recording()
 
@@ -73,16 +73,16 @@ def evaluateData():
             print("motion in chunk %s" % i)
         lastChunkData[i] = chunkData[i]
 
-def saveMedia(type):
-    if type == "photo":
-        global ph
-        global vi
-        shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        ph = ph + 1
-    if type == "video":
-        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
-        vi = vi + 1
-    print("save %s" % ph)
+#def saveMedia(type):
+#    if type == "photo":
+#        global ph
+#        global vi
+#        shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
+#        ph = ph + 1
+#    if type == "video":
+#        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
+#        vi = vi + 1
+#    print("save %s" % ph)
 
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
