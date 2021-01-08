@@ -65,6 +65,7 @@ def evaluateData():
         global motionFlag
         if chunkData[i] > lastChunkData[i] + sensitivity or chunkData[i] < lastChunkData[i] - sensitivity:
             motionFlag = True
+            print("motion in chunk %s" % i)
         lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
