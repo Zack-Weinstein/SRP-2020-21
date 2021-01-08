@@ -6,7 +6,7 @@ import cv2
 from picamera import PiCamera
 from time import sleep
 
-def setup()
+def setup():
     sensitivity = 3
     motionFlag = False
     chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
