@@ -78,16 +78,16 @@ def evaluateData():
             print("motion in chunk %s" % i)
         lastChunkData[i] = chunkData[i]
 
-#def saveMedia(type):
-#    if type == "photo":
-#        global ph
-#        global vi
-#        shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-#        ph = ph + 1
-#    if type == "video":
-#        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
-#        vi = vi + 1
-#    print("save %s" % ph)
+def saveMedia(type):
+    global ph
+    global vi
+    if type == "photo":
+        shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
+        ph = ph + 1
+    if type == "video":
+        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
+        vi = vi + 1
+    print("save %s" % ph)
 
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
@@ -95,10 +95,11 @@ def resetCache():
 
 resetCache()
 while(True):
+    capture("photo", 1)
     updateValues()
     evaluateData()
     if motionFlag:
-        capture("photo", 1)
+        saveMedia("photo")
     resetCache()
     motionFlag = False
     #sleep(0.2)
