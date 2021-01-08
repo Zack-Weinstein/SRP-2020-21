@@ -43,6 +43,7 @@ def updateValues():
         chunkData[data] = 0
     img = cv2.imread('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, cv2.IMREAD_GRAYSCALE)
     for chunkNum in range(0, 8):
+        print("chunk %s" % chunkNum)
         if chunkNum < 4:
             Xstart = chunkX * chunkNum
             Ystart = chunkY * 0
@@ -55,6 +56,7 @@ def updateValues():
             for piY in range(int(Ystart), int(Yend)):
                 chunkData[chunkNum] = chunkData[chunkNum] + img[piY, piX]
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
+        print(chunkData[chunkNum])
 
 def evaluateData():
     global lastChunkData
