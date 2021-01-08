@@ -78,6 +78,10 @@ def resetCache():
     os.mkdir('/home/pi/Desktop/Analysis')
 
 resetCache()
+capture("photo", 1)
+updateValues()
+for i in range(0, 8):
+    lastChunkData[i] = chunkData[i]
 while(True):
     capture("photo", 1)
     updateValues()
