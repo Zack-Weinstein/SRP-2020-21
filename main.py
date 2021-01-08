@@ -51,8 +51,8 @@ def updateValues():
             Ystart = chunkY * 1 
         Xend = Xstart + chunkX
         Yend = Ystart + chunkY
-        for piX in range(Xstart, Xend):
-            for piY in range(Ystart, Yend):
+        for piX in range(int(Xstart), int(Xend)):
+            for piY in range(int(Ystart), int(Yend)):
                 chunkData[chunkNum] = chunkData[chunkNum] + img[piY, piX]
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
 
