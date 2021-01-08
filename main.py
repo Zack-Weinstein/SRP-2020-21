@@ -38,7 +38,7 @@ def capture(type, length):
     global vi
     if type == "photo":
         camera.capture('/home/pi/Desktop/%s/photo_%s.jpg' % ("Analysis", ph))
-        ph = ph + 1
+        #ph = ph + 1
     if type == "video":
         camera.start_recording('/home/pi/Desktop/%s/video_%s.h264' % (dirNum, vi))
         sleep(length)
