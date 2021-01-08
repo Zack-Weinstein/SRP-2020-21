@@ -59,8 +59,9 @@ def updateValues():
 def evaluateData():
     global lastChunkData
     for i in range(0, 8):
+        global motionFlag
         if chunkData[i] > lastChunkData[i] + sensitivity or chunkData[i] < lastChunkData[i] - sensitivity:
-            return True
+            motionFlag = True
         lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
@@ -80,8 +81,10 @@ resetCache()
 while(True):
     capture("photo", 1)
     updateValues()
-    if evaluateData():
+    evaluateData()
+    if motionFlag:
         saveMedia("photo")
     else:
         resetCache()
+    motionFlag = False
     sleep(0.2)
