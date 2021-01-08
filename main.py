@@ -31,8 +31,9 @@ while (newDir):
         os.mkdir('/home/pi/Desktop/%s' % dirNum)
 
 def capture(type, length):
+    camera.resolution = (resX, resY)
     if type == "photo":
-        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph)
+        camera.capture('/home/pi/Desktop/%s/photo_%s' % dirNum % ph)
     if type == "video":
         camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi)
         sleep(length)
@@ -41,7 +42,9 @@ def capture(type, length):
 def updateValues():
     for data in range(0, 8):
         chunkData[data] = 0
-    img = cv2.imread('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, cv2.IMREAD_GRAYSCALE)
+    camera.resolution = (256, 144)
+    camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
+    img = cv2.imread('/home/pi/Desktop/Analysis/photo.jpg', cv2.IMREAD_GRAYSCALE)
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
@@ -85,12 +88,10 @@ def resetCache():
 
 resetCache()
 while(True):
-    capture("photo", 1)
     updateValues()
     evaluateData()
     if motionFlag:
-        saveMedia("photo")
-    else:
-        resetCache()
+        capture("photo", 1)
+    resetCache()
     motionFlag = False
     #sleep(0.2)
