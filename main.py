@@ -42,6 +42,7 @@ def updateValues():
     for data in range(0, 8):
         chunkData[data] = 0
     img = cv2.imread('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, cv2.IMREAD_GRAYSCALE)
+    print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
         if chunkNum < 4:
@@ -69,11 +70,13 @@ def evaluateData():
 def saveMedia(type):
     if type == "photo":
         global ph
+        global vi
         shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
         ph = ph + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
         vi = vi + 1
+    print("save %s" % ph)
 
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
