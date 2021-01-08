@@ -18,7 +18,7 @@ def setup():
     chunkY = resY / 2
     chunkPixs = chunkX * chunkY
     camera = PiCamera()
-    camera.resolution = (resX, rexY)
+    camera.resolution = (resX, resY)
     camera.framerate = (30)
     ph = 0
     vi = 0
