@@ -78,7 +78,7 @@ def resetCache():
 setup()
 resetCache()
 while(True):
-    capture("photo")
+    capture("photo", 1)
     updateValues()
     if evaluateData():
         saveMedia("photo")
