@@ -1,4 +1,4 @@
-# Main file (for now)
+# Main file
 
 import os
 import shutil
