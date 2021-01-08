@@ -60,9 +60,9 @@ def evaluateData():
     for i in range(0, 8):
         if chunkData[i] > (lastChunkData[i] + (sensitivity * lastChunkData[i])) or chunkData[i] < (lastChunkData[i] - (sensitivity * lastChunkData[i])):
             return True
-        lastChunkData[i] = chunkData[i]
         else:
             return False
+        lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
     if type == "photo":
