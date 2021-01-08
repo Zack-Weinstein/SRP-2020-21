@@ -34,16 +34,12 @@ while (newDir):
 
 def capture(type, length):
     camera.resolution = (resX, resY)
-    global ph
-    global vi
     if type == "photo":
-        camera.capture('/home/pi/Desktop/%s/photo_%s.jpg' % ("Analysis", ph))
-        #ph = ph + 1
+        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph)
     if type == "video":
-        camera.start_recording('/home/pi/Desktop/%s/video_%s.h264' % (dirNum, vi))
+        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi
         sleep(length)
         camera.stop_recording()
-        vi = vi + 1
     print("save %s" % ph)
 
 def updateValues():
