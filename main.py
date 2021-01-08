@@ -64,8 +64,9 @@ def evaluateData():
 
 def saveMedia(type):
     if type == "photo":
+        global ph
         shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        #ph = ph + 1
+        ph = ph + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
         vi = vi + 1
