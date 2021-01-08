@@ -87,4 +87,4 @@ while(True):
     else:
         resetCache()
     motionFlag = False
-    sleep(0.2)
+    #sleep(0.2)
