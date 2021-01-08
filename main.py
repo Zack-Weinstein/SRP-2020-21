@@ -96,6 +96,8 @@ while(True):
     evaluateData()
     if motionFlag:
         saveMedia("photo")
-    resetCache()
+        resetCache()
+    else:
+        resetCache()
     motionFlag = False
     #sleep(0.2)
