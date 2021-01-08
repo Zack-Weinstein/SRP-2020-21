@@ -60,6 +60,7 @@ def evaluateData():
     for i in range(0, 8):
         if chunkData[i] > lastChunkData[i] + sensitivity or chunkData[i] < lastChunkData[i] - sensitivity:
             return True
+        global lastChunkData
         lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
@@ -75,11 +76,6 @@ def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
     os.mkdir('/home/pi/Desktop/Analysis')
 
-resetCache()
-capture("photo", 1)
-updateValues()
-for i in range(0, 8):
-    lastChunkData[i] = chunkData[i]
 resetCache()
 while(True):
     capture("photo", 1)
