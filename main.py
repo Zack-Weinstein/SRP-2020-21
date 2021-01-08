@@ -13,8 +13,10 @@ chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 resX = 1920
 resY = 1080
-chunkX = resX / 4
-chunkY = resY / 2
+aResX = 256
+aResY = 144
+chunkX = aResX / 4
+chunkY = aResY / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
 camera.resolution = (resX, resY)
@@ -42,7 +44,7 @@ def capture(type, length):
 def updateValues():
     for data in range(0, 8):
         chunkData[data] = 0
-    camera.resolution = (256, 144)
+    camera.resolution = (aResX, aResY)
     camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
     img = cv2.imread('/home/pi/Desktop/Analysis/photo.jpg', cv2.IMREAD_GRAYSCALE)
     print()
