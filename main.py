@@ -82,4 +82,4 @@ while(True):
         saveMedia("photo")
     else:
         resetCache()
-    sleep(100)
+    sleep(0.2)
