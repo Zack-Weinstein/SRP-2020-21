@@ -8,15 +8,15 @@ motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-resX = 1920
-resY = 1080
+resX = 640
+resY = 480
 chunkX = resX / 4
 chunkY = resY / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
 camera.resolution = (resX, resY)
 camera.framerate = (30)
-rawCapture = PiRGBArray(camera, size=(1920, 1080))
+rawCapture = PiRGBArray(camera, size=(640, 480))
 
 def updateValues():
     for data in range(0, 8):
