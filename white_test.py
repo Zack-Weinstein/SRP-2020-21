@@ -14,10 +14,10 @@ ph = 0
 vi = 0
 
 
-def updateValues():
+def updateValues(color):
     for data in range(0, 8):
         chunkData[data] = 0
-    img = cv2.imread('/home/pi/Desktop/white.jpg', cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread('/home/pi/Desktop/%s.jpg' % color, cv2.IMREAD_GRAYSCALE)
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
@@ -35,4 +35,5 @@ def updateValues():
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
         print(chunkData[chunkNum])
 
-updateValues()
+updateValues("white")
+updateValues("black")
