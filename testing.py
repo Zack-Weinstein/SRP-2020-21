@@ -17,13 +17,13 @@ camera = PiCamera()
 camera.resolution = (resX, resY)
 camera.framerate = (30)
 rawCapture = PiRGBArray(camera, size=(640, 480))
+recent = True
 
 def updateValues():
     for data in range(0, 8):
         chunkData[data] = 0
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	    img = frame.array
-        recent = True
         if recent:
             break
     print()
