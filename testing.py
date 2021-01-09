@@ -38,3 +38,5 @@ def updateValues():
                 chunkData[chunkNum] = chunkData[chunkNum] + img[piY, piX]
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
         print(chunkData[chunkNum])
+
+updateValues()
