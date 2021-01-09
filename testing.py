@@ -21,7 +21,8 @@ rawCapture = PiRGBArray(camera, size=(1920, 1080))
 def updateValues():
     for data in range(0, 8):
         chunkData[data] = 0
-    img = camera.capture(rawCapture, format="bgr", use_video_port=True).array
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+	    img = frame.array
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
