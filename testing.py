@@ -16,7 +16,7 @@ chunkPixs = chunkX * chunkY
 camera = PiCamera()
 camera.resolution = (resX, resY)
 camera.framerate = (30)
-rawCapture = PiRGBArray(camera, size=(640, 480))
+rawCapture = PiRGBArray(camera, size=(1920, 1080))
 
 def updateValues():
     for data in range(0, 8):
