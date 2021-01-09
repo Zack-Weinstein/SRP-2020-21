@@ -42,7 +42,6 @@ def capture(type, length):
         camera.stop_recording()
 
 def updateValues():
-    global chunkData
     for data in range(0, 8):
         chunkData[data] = 0
     camera.resolution = (aResX, aResY)
