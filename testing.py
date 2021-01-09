@@ -23,7 +23,9 @@ def updateValues():
         chunkData[data] = 0
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	    img = frame.array
-        break
+        recent = True
+        if recent:
+            break
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
