@@ -6,7 +6,7 @@ import cv2
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import numpy as np
-from multiprocessing import process
+from multiprocessing import Process
 from time import sleep
 
 sensitivity = 3
