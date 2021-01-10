@@ -16,8 +16,8 @@ motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-resX = 1920
-resY = 1080
+resX = 1280
+resY = 720
 aResX = 256
 aResY = 144
 chunkX = aResX / 4
@@ -53,10 +53,8 @@ def updateValues():
         chunkData[data] = 0
     #camera.resolution = (resX, resY)
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
-    print("(")
     im = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(im, (aResX, aResY))
-    print(")")
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
