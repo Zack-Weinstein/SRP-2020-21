@@ -104,7 +104,7 @@ if __name__ == "__main__":
         updateValues()
         evaluateData()
         if motionFlag:
-            proc = process(target=saveMedia)
+            proc = Process(target=saveMedia)
             proc.start()
             proc.join()
             #saveMedia("photo")
