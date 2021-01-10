@@ -30,7 +30,11 @@ dirNum = 1
 LCapture = PiRGBArray(camera, size=(resX, resY))
 SCapture = PiRGBArray(camera, size=(aResX, aResY))
 LStream = camera.capture_continuous(LCapture, format="bgr", use_video_port=True)
-Stream = camera.capture_continuous(SCapture, format="bgr", use_video_port=True, splitter_port=2, resize=(aResX, aResY))
+SStream = camera.capture_continuous(SCapture, format="bgr", use_video_port=True, splitter_port=2, resize=(aResX, aResY))
+LNext = LStream.next()
+SNext = SStream.next()
+Limg = LNext.array
+Simg = SNext.array
 while (newDir):
     if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
         dirNum = dirNum + 1
@@ -53,7 +57,10 @@ def updateValues():
         chunkData[data] = 0
     #camera.resolution = (resX, resY)
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
-    img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    LNext = LStream.next()
+    SNext = SStream.next()
+    Limg = LNext.array
+    Simg = SNext.array
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
@@ -67,7 +74,7 @@ def updateValues():
         Yend = Ystart + chunkY
         for piX in range(int(Xstart), int(Xend)):
             for piY in range(int(Ystart), int(Yend)):
-                chunkData[chunkNum] = chunkData[chunkNum] + img[piY, piX]
+                chunkData[chunkNum] = chunkData[chunkNum] + Simg[piY, piX]
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
         print(chunkData[chunkNum])
 
@@ -83,9 +90,10 @@ def evaluateData():
 def saveMedia(type):
     global ph
     global vi
+    global Limg
     if type == "photo":
         #shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.png' % (dirNum, ph), image)
+        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.png' % (dirNum, ph), Limg)
         ph = ph + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
@@ -98,9 +106,8 @@ def resetCache():
     rawCapture.truncate(0)
 
 resetCache()
-for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
+while True: 
     #capture("photo", 1)
-    image = frame.array
     updateValues()
     evaluateData()
     if motionFlag:
