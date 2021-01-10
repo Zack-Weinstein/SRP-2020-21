@@ -86,7 +86,7 @@ def saveMedia(type):
     global vi
     if type == "photo":
         #shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.png' % (dirNum, ph), image)
+        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, ph), image)
         ph = ph + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
