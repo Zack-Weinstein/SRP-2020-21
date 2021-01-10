@@ -53,8 +53,10 @@ def updateValues():
         chunkData[data] = 0
     #camera.resolution = (resX, resY)
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
+    print("(")
     im = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(im, (aResX, aResY))
+    print(")")
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
@@ -105,14 +107,8 @@ if __name__ == "__main__":
         image = frame.array
         updateValues()
         evaluateData()
-        if h > 1:
-            proc.join()
         if motionFlag:
-            proc = Process(target=saveMedia, args=("photo",))
-            proc.start()
-            #proc.join()
-            #saveMedia("photo")
-            h = h + 1
+            saveMedia("photo")
         resetCache()
         motionFlag = False
         #sleep(0.2)
