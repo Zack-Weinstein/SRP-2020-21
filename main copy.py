@@ -103,10 +103,11 @@ if __name__ == "__main__":
         image = frame.array
         updateValues()
         evaluateData()
+        proc.join()
         if motionFlag:
             proc = Process(target=saveMedia, args=("photo",))
             proc.start()
-            proc.join()
+            #proc.join()
             #saveMedia("photo")
         resetCache()
         motionFlag = False
