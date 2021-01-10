@@ -92,7 +92,7 @@ def saveMedia(type):
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
     os.mkdir('/home/pi/Desktop/Analysis')
-    rawCapture.truncate()
+    rawCapture.truncate(0)
 
 resetCache()
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
