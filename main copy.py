@@ -9,6 +9,8 @@ import numpy as np
 from multiprocessing import Process
 from time import sleep
 
+h = 1
+
 sensitivity = 3
 motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
@@ -103,13 +105,14 @@ if __name__ == "__main__":
         image = frame.array
         updateValues()
         evaluateData()
-        try:
+        if h > 1:
             proc.join()
         if motionFlag:
             proc = Process(target=saveMedia, args=("photo",))
             proc.start()
             #proc.join()
             #saveMedia("photo")
+            h = h + 1
         resetCache()
         motionFlag = False
         #sleep(0.2)
