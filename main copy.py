@@ -34,7 +34,6 @@ while (newDir):
     else:
         newDir = False
         os.mkdir('/home/pi/Desktop/%s' % dirNum)
-img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
 
 def capture(type, length):
     camera.resolution = (resX, resY)
@@ -51,7 +50,7 @@ def updateValues():
         chunkData[data] = 0
     camera.resolution = (aResX, aResY)
     camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
-    img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
+    #img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
@@ -97,6 +96,7 @@ def resetCache():
 resetCache()
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
     #capture("photo", 1)
+    img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
     updateValues()
     evaluateData()
     if motionFlag:
