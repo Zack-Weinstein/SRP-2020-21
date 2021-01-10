@@ -17,8 +17,8 @@ resX = 1920
 resY = 1080
 aResX = 256
 aResY = 144
-chunkX = aResX / 4
-chunkY = aResY / 2
+chunkX = resX / 4
+chunkY = resY / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
 camera.resolution = (resX, resY)
@@ -45,12 +45,12 @@ def capture(type, length):
         camera.stop_recording()
 
 def updateValues():
-    global img
+    global image
     for data in range(0, 8):
         chunkData[data] = 0
-    camera.resolution = (aResX, aResY)
+    camera.resolution = (resX, resY)
     camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
-    #img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
+    img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
@@ -82,7 +82,7 @@ def saveMedia(type):
     global vi
     if type == "photo":
         #shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.png' % (dirNum, ph), img)
+        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.png' % (dirNum, ph), image)
         ph = ph + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
@@ -96,7 +96,7 @@ def resetCache():
 resetCache()
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
     #capture("photo", 1)
-    img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
+    image = frame.array
     updateValues()
     evaluateData()
     if motionFlag:
