@@ -11,7 +11,7 @@ from time import sleep
 
 h = 1
 
-sensitivity = 3
+sensitivity = 1.5
 motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
