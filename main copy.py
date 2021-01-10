@@ -31,8 +31,8 @@ LCapture = PiRGBArray(camera, size=(resX, resY))
 SCapture = PiRGBArray(camera, size=(aResX, aResY))
 LStream = camera.capture_continuous(LCapture, format="bgr", use_video_port=True)
 SStream = camera.capture_continuous(SCapture, format="bgr", use_video_port=True, splitter_port=2, resize=(aResX, aResY))
-LNext = LStream.next()
-SNext = SStream.next()
+LNext = LStream.__next__()
+SNext = SStream.__next__()
 Limg = LNext.array
 Simg = SNext.array
 while (newDir):
@@ -59,8 +59,8 @@ def updateValues():
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
     LNext = LStream.next()
     SNext = SStream.next()
-    Limg = LNext.array
-    Simg = SNext.array
+    LNext = LStream.__next__()
+    SNext = SStream.__next__()
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
