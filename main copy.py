@@ -94,8 +94,8 @@ def saveMedia(type):
     print("save %s" % ph)
 
 def resetCache():
-    shutil.rmtree('/home/pi/Desktop/Analysis')
-    os.mkdir('/home/pi/Desktop/Analysis')
+    #shutil.rmtree('/home/pi/Desktop/Analysis')
+    #os.mkdir('/home/pi/Desktop/Analysis')
     rawCapture.truncate(0)
 
 if __name__ == "__main__":
