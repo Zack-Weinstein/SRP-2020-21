@@ -17,8 +17,8 @@ resX = 1920
 resY = 1080
 aResX = 256
 aResY = 144
-chunkX = resX / 4
-chunkY = resY / 2
+chunkX = aResX / 4
+chunkY = aResY / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
 camera.resolution = (resX, resY)
@@ -27,7 +27,10 @@ ph = 0
 vi = 0
 newDir = True
 dirNum = 1
-rawCapture = PiRGBArray(camera, size=(resX, resY))
+LCapture = PiRGBArray(camera, size=(resX, resY))
+SCapture = PiRGBArray(camera, size=(aResX, aResY))
+LStream = camera.capture_continuous(LCapture, format="bgr", use_video_port=True)
+Stream = camera.capture_continuous(SCapture, format="bgr", use_video_port=True, splitter_port=2, resize=(aResX, aResY))
 while (newDir):
     if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
         dirNum = dirNum + 1
