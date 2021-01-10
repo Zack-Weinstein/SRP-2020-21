@@ -5,7 +5,8 @@ import shutil
 import cv2
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-import numpy as np 
+import numpy as np
+from multiprocessing import process
 from time import sleep
 
 sensitivity = 3
@@ -95,14 +96,18 @@ def resetCache():
     os.mkdir('/home/pi/Desktop/Analysis')
     rawCapture.truncate(0)
 
-resetCache()
-for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
-    #capture("photo", 1)
-    image = frame.array
-    updateValues()
-    evaluateData()
-    if motionFlag:
-        saveMedia("photo")
+if __name__ == "__main__":
     resetCache()
-    motionFlag = False
-    #sleep(0.2)
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
+        #capture("photo", 1)
+        image = frame.array
+        updateValues()
+        evaluateData()
+        if motionFlag:
+            proc = process(target=saveMedia)
+            proc.start()
+            proc.join()
+            #saveMedia("photo")
+        resetCache()
+        motionFlag = False
+        #sleep(0.2)
