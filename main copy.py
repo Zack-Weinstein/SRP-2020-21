@@ -49,7 +49,8 @@ def updateValues():
         chunkData[data] = 0
     camera.resolution = (aResX, aResY)
     camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
-	img = cv2.cvtColor(frame.arrat, cv2.COLOR_BGR2GRAY)    print()
+	img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)    
+    print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
         if chunkNum < 4:
