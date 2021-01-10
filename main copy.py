@@ -1,6 +1,5 @@
 # Main file
 
-import io
 import os
 import shutil
 import cv2
@@ -29,7 +28,6 @@ vi = 0
 newDir = True
 dirNum = 1
 rawCapture = PiRGBArray(camera, size=(resX, resY))
-stream = io.BytesIO()
 while (newDir):
     if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
         dirNum = dirNum + 1
@@ -50,8 +48,8 @@ def updateValues():
     global image
     for data in range(0, 8):
         chunkData[data] = 0
-    camera.resolution = (resX, resY)
-    camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
+    #camera.resolution = (resX, resY)
+    #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
     img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     print()
     for chunkNum in range(0, 8):
@@ -94,7 +92,7 @@ def saveMedia(type):
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
     os.mkdir('/home/pi/Desktop/Analysis')
-    stream.truncate()
+    rawCapture.truncate()
 
 resetCache()
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
