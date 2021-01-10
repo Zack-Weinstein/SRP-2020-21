@@ -5,7 +5,7 @@ import shutil
 import cv2
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-import numpy as np
+#import numpy as np
 from time import sleep
 
 sensitivity = 3
@@ -75,8 +75,7 @@ def updateValues():
         for piX in range(int(Xstart), int(Xend)):
             for piY in range(int(Ystart), int(Yend)):
                 chunkData[chunkNum] = chunkData[chunkNum] + Simg[piY, piX]
-        #chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
-        chunkData[chunkNum] = (chunkData[chunkNum] / chunkPixs) * (100 / 255)
+        chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
         print(chunkData[chunkNum])
 
 def evaluateData():
