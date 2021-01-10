@@ -103,8 +103,6 @@ def saveMedia(type):
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
     os.mkdir('/home/pi/Desktop/Analysis')
-    LStream.truncate(0)
-    SStream.truncate(0)
 
 resetCache()
 while True: 
