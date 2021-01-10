@@ -57,10 +57,10 @@ def updateValues():
         chunkData[data] = 0
     #camera.resolution = (resX, resY)
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
-    LNext = LStream.next()
-    SNext = SStream.next()
     LNext = LStream.__next__()
     SNext = SStream.__next__()
+    Limg = LNext.array
+    Simg = SNext.array
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
