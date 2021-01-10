@@ -1,5 +1,6 @@
 # Main file
 
+import io
 import os
 import shutil
 import cv2
@@ -28,6 +29,7 @@ vi = 0
 newDir = True
 dirNum = 1
 rawCapture = PiRGBArray(camera, size=(resX, resY))
+stream = io.BytesIO()
 while (newDir):
     if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
         dirNum = dirNum + 1
@@ -92,6 +94,7 @@ def saveMedia(type):
 def resetCache():
     shutil.rmtree('/home/pi/Desktop/Analysis')
     os.mkdir('/home/pi/Desktop/Analysis')
+    stream.truncate()
 
 resetCache()
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
