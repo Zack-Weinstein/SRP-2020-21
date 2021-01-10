@@ -34,6 +34,7 @@ while (newDir):
     else:
         newDir = False
         os.mkdir('/home/pi/Desktop/%s' % dirNum)
+img = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
 
 def capture(type, length):
     camera.resolution = (resX, resY)
@@ -45,6 +46,7 @@ def capture(type, length):
         camera.stop_recording()
 
 def updateValues():
+    global img
     for data in range(0, 8):
         chunkData[data] = 0
     camera.resolution = (aResX, aResY)
@@ -81,7 +83,7 @@ def saveMedia(type):
     global vi
     if type == "photo":
         #shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        cv2.imwrite('/home/pi/Desktop/%s/photo_%s' % (dirNum, ph))
+        cv2.imwrite('/home/pi/Desktop/%s/photo_%s' % (dirNum, ph), img)
         ph = ph + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
