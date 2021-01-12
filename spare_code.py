@@ -1,0 +1,7 @@
+shutil.rmtree('/home/pi/Desktop/Analysis')
+os.mkdir('/home/pi/Desktop/Analysis')
+camera.resolution = (resX, resY)
+camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
+shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0], '/home/pi/Desktop/%s' % dirNum)
+camera.resolution = (resX, resY)
+camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
