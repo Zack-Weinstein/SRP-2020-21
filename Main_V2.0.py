@@ -28,7 +28,7 @@ dirNum = 1
 
 def newLogDir():
     newDir = True
-    global dirnum
+    global dirNum
     while (newDir):
         if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
             dirNum = dirNum + 1
