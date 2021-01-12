@@ -23,13 +23,12 @@ camera.framerate = (30)
 camera.resolution = (SRes[0], SRes[1])
 rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 MediaType = [0, 0]
-#ph = 0
-#vi = 0
 motionFlag = False
+dirNum = 1
 
 def newLogDir():
     newDir = True
-    dirNum = 1
+    global dirnum
     while (newDir):
         if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
             dirNum = dirNum + 1
