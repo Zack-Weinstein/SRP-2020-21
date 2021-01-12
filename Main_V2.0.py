@@ -12,7 +12,7 @@ import time
 h = 1
 
 sensitivity = 1.5
-evalInterval = 0.1
+evalInterval = 0.2
 motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -105,11 +105,11 @@ if __name__ == "__main__":
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):   
         if time.time() > lastEvalTime + evalInterval:
             lastEvalTime = time.time()
-            print(lastEvalTime)
             image = frame.array
             updateValues()
             evaluateData()
             if motionFlag:
                 saveMedia("photo")
             motionFlag = False
+            print(lastEvalTime)
         resetCache()
