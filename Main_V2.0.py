@@ -28,7 +28,7 @@ rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 MediaType = [0, 0]
 motionFlag = False
 
-def newLogDir():            # Finds next available save directory
+def newSaveDir():            # Finds next available save directory
     newDir = True
     global dirNum
     dirNum = 1
@@ -56,7 +56,7 @@ def updateValues():
     img = cv2.resize(im, (ARes[0], ARes[1]))
     print()
     for chunkNum in range(0, 8):
-        print("chunk %s" % chunkNum)
+        print("chunk %s" % chunkNum, end = " ")
         if chunkNum < 4:
             Xstart = chunkX * chunkNum
             Ystart = chunkY * 0
@@ -95,7 +95,7 @@ def resetCache():
 
 try:
     resetCache()
-    newLogDir()
+    newSaveDir()
     lastEvalTime = 0
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
         currentInterval = time.time() - lastEvalTime
@@ -113,6 +113,7 @@ try:
 except:
     print("\n")
     print("  ** Program End Via Keyboard Interupt **  ")
+
 
 
 #shutil.rmtree('/home/pi/Desktop/Analysis')
