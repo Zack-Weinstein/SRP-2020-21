@@ -102,8 +102,9 @@ def resetCache():
 if __name__ == "__main__":
     resetCache()
     lastEvalTime = 0
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):   
-        if time.time() > lastEvalTime + evalInterval:
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        currentInterval = time.time() - lastEvalTime
+        if currentInterval > evalInterval:
             lastEvalTime = time.time()
             image = frame.array
             updateValues()
@@ -112,4 +113,5 @@ if __name__ == "__main__":
                 saveMedia("photo")
             motionFlag = False
             print(lastEvalTime)
+            print(currentInterval)
         resetCache()
