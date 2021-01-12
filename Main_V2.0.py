@@ -81,8 +81,7 @@ def evaluateData():
         lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
-    global MediaType[0]
-    global MediaType[1]
+    global MediaType
     if type == "photo":
         cv2.imwrite('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, MediaType[0]), image)
         MediaType[0] = MediaType[0] + 1
