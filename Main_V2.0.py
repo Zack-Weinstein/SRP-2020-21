@@ -20,17 +20,17 @@ ARes = [256, 144]
 #resY = 504
 #aResX = 256
 #aResY = 144
-chunkX = SRes[1] / 4
-chunkY = SRes[2] / 2
+chunkX = SRes[0] / 4
+chunkY = SRes[1] / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
-camera.resolution = (SRes[1], SRes[2])
+camera.resolution = (SRes[0], SRes[1])
 camera.framerate = (30)
 ph = 0
 vi = 0
 newDir = True
 dirNum = 1
-rawCapture = PiRGBArray(camera, size=(SRes[1], SRes[2]))
+rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 while (newDir):
     if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
         dirNum = dirNum + 1
@@ -39,7 +39,7 @@ while (newDir):
         os.mkdir('/home/pi/Desktop/%s' % dirNum)
 
 def capture(type, length):
-    camera.resolution = (SRes[1], SRes[2])
+    camera.resolution = (SRes[0], SRes[1])
     if type == "photo":
         camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph)
     if type == "video":
@@ -54,7 +54,7 @@ def updateValues():
     #camera.resolution = (resX, resY)
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
     im = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    img = cv2.resize(im, (ARes[1], aResY))
+    img = cv2.resize(im, (ARes[0], ARes[1]))
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
