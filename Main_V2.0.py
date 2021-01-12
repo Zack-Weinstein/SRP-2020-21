@@ -39,7 +39,7 @@ def newSaveDir():            # Finds next available save directory
             newDir = False
             os.mkdir('/home/pi/Desktop/%s' % dirNum)
 
-def capture(type, length):
+def capture(type, length):  # Captures specified type of media
     camera.resolution = (SRes[0], SRes[1])
     if type == "photo":
         camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0])
@@ -48,7 +48,7 @@ def capture(type, length):
         sleep(length)
         camera.stop_recording()
 
-def updateValues():
+def updateValues():         # Updates buffered values for current camera readout
     global image
     for data in range(0, 8):
         chunkData[data] = 0
@@ -56,7 +56,7 @@ def updateValues():
     img = cv2.resize(im, (ARes[0], ARes[1]))
     print()
     for chunkNum in range(0, 8):
-        print("chunk %s" % chunkNum, end = " ")
+        print("chunk %s:" % chunkNum, end = " ")
         if chunkNum < 4:
             Xstart = chunkX * chunkNum
             Ystart = chunkY * 0
@@ -71,7 +71,7 @@ def updateValues():
         chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255), 1)
         print(chunkData[chunkNum])
 
-def evaluateData():
+def evaluateData():         # Evaluates current buffered data in comparison to the last buffered data and determines if there is motion between the two.
     global lastChunkData
     for i in range(0, 8):
         global motionFlag
@@ -80,7 +80,7 @@ def evaluateData():
             print("motion in chunk %s" % i)
         lastChunkData[i] = chunkData[i]
 
-def saveMedia(type):
+def saveMedia(type):       # Saves media stored in openCV numpy array
     global MediaType
     if type == "photo":
         cv2.imwrite('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, MediaType[0]), image)
@@ -90,7 +90,7 @@ def saveMedia(type):
         MediaType[1] = MediaType[1] + 1
     print("save %s" % MediaType[0])
 
-def resetCache():
+def resetCache():           # Resets openCV stream
     rawCapture.truncate(0)
 
 try:
