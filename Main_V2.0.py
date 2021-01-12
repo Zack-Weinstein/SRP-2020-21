@@ -105,6 +105,7 @@ if __name__ == "__main__":
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):   
         if time.time() > lastEvalTime + evalInterval:
             lastEvalTime = time.time()
+            print(lastEvalTime)
             image = frame.array
             updateValues()
             evaluateData()
