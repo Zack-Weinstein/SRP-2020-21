@@ -11,7 +11,7 @@ import time
 
 # Declaring global variables
 sensitivity = 1.5
-evalInterval = 0.2
+evalInterval = 0.3
 SRes = [896, 504]
 ARes = [256, 144]
 
@@ -100,7 +100,7 @@ try:
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
         currentInterval = round(time.time() - lastEvalTime, 2)
         if currentInterval >= evalInterval:
-            lastEvalTime = time.time()
+            lastEvalTime = round(time.time(), 2)
             image = frame.array
             updateValues()
             evaluateData()
