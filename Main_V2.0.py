@@ -98,8 +98,8 @@ try:
     newSaveDir()
     lastEvalTime = 0
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-        currentInterval = time.time() - lastEvalTime
-        if currentInterval > evalInterval:
+        currentInterval = round(time.time() - lastEvalTime, 2)
+        if currentInterval >= evalInterval:
             lastEvalTime = time.time()
             image = frame.array
             updateValues()
