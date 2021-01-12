@@ -11,7 +11,7 @@ import time
 
 # Declaring global variables
 sensitivity = 1.5
-evalInterval = 0.3
+evalInterval = 0.2
 SRes = [896, 504]
 ARes = [256, 144]
 
