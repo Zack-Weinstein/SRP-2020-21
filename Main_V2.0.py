@@ -24,11 +24,11 @@ camera.resolution = (SRes[0], SRes[1])
 rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 MediaType = [0, 0]
 motionFlag = False
-dirNum = 1
 
 def newLogDir():
     newDir = True
     global dirNum
+    dirNum = 1
     while (newDir):
         if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
             dirNum = dirNum + 1
@@ -49,8 +49,6 @@ def updateValues():
     global image
     for data in range(0, 8):
         chunkData[data] = 0
-    #camera.resolution = (resX, resY)
-    #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
     im = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(im, (ARes[0], ARes[1]))
     print()
@@ -117,3 +115,5 @@ if __name__ == "__main__":
 #camera.resolution = (resX, resY)
 #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
 #shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0], '/home/pi/Desktop/%s' % dirNum)
+#camera.resolution = (resX, resY)
+#camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
