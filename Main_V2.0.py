@@ -70,7 +70,7 @@ def updateValues():
         for piX in range(int(Xstart), int(Xend)):
             for piY in range(int(Ystart), int(Yend)):
                 chunkData[chunkNum] = chunkData[chunkNum] + img[piY, piX]
-        chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255))
+        chunkData[chunkNum] = round((chunkData[chunkNum] / chunkPixs) * (100 / 255), 1)
         print(chunkData[chunkNum])
 
 def evaluateData():
