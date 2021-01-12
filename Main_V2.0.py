@@ -23,7 +23,6 @@ chunkY = ARes[1] / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
 camera.framerate = (30)
-camera.awb_mode = 'cloudy'
 camera.resolution = (SRes[0], SRes[1])
 rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 MediaType = [0, 0]
