@@ -14,6 +14,7 @@ sensitivity = 1.5
 evalInterval = 0.1
 SRes = [896, 504]
 ARes = [256, 144]
+saveDir = '/home/pi/Desktop/'
 
 # Declaring variables before use
 chunkData = [0] * 8
@@ -34,20 +35,20 @@ def newSaveDir():            # Finds next available save directory
     global dirNum
     dirNum = 1
     while (newDir):
-        if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
+        if os.path.isdir('%s%s' % (saveDir, dirNum)):
             dirNum = dirNum + 1
         else:
             newDir = False
-            os.mkdir('/home/pi/Desktop/%s' % dirNum)
+            os.mkdir('%s%s' % (saveDir, dirNum))
 
-def capture(type, length):  # Captures specified type of media
-    camera.resolution = (SRes[0], SRes[1])
-    if type == "photo":
-        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0])
-    if type == "video":
-        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1])
-        sleep(length)
-        camera.stop_recording()
+#def capture(type, length):  # Captures specified type of media
+#    camera.resolution = (SRes[0], SRes[1])
+#    if type == "photo":
+#        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0])
+#    if type == "video":
+#        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1])
+#        sleep(length)
+#        camera.stop_recording()
 
 def updateValues():         # Updates buffered values for current camera readout
     global image
@@ -84,7 +85,7 @@ def evaluateData():         # Evaluates current buffered data in comparison to t
 def saveMedia(type):       # Saves media stored in openCV numpy array
     global MediaType
     if type == "photo":
-        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, MediaType[0]), image)
+        cv2.imwrite('%s%s/photo_%s.jpg' % (saveDir, dirNum, MediaType[0]), image)
         MediaType[0] = MediaType[0] + 1
     if type == "video":
         shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1], '/home/pi/Desktop/%s' % dirNum)
