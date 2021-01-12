@@ -107,8 +107,8 @@ try:
             if motionFlag:
                 saveMedia("photo")
             motionFlag = False
-            print(lastEvalTime)
-            print(currentInterval)
+            print("Last Loop End: %s" % lastEvalTime)
+            print("Loop Time:     %s" % currentInterval)
         resetCache()
 except:
     print("\n")
