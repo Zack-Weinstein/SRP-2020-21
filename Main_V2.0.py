@@ -1,5 +1,6 @@
 # Main file
 
+# Importing required libraries
 import os
 import shutil
 import cv2
@@ -8,13 +9,15 @@ from picamera.array import PiRGBArray
 import numpy as np
 import time
 
+# Declaring global variables
 sensitivity = 1.5
 evalInterval = 0.2
 SRes = [896, 504]
 ARes = [256, 144]
 
-chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
+# Declaring variables before use
+chunkData = [0] * 8
+lastChunkData = [0] * 8
 chunkX = ARes[0] / 4
 chunkY = ARes[1] / 2
 chunkPixs = chunkX * chunkY
@@ -25,7 +28,7 @@ rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 MediaType = [0, 0]
 motionFlag = False
 
-def newLogDir():
+def newLogDir():            # Finds next available save directory
     newDir = True
     global dirNum
     dirNum = 1
