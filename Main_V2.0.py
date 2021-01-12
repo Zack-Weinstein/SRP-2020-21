@@ -12,7 +12,7 @@ import time
 h = 1
 
 sensitivity = 1.5
-evalInterval = 2
+evalInterval = 0.1
 motionFlag = False
 chunks = ["aa", "ab", "ac", "ad", "ba", "bb", "bc", "bd",]
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
