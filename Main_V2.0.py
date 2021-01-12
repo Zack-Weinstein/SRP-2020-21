@@ -27,7 +27,7 @@ MediaType = [0, 0]
 #vi = 0
 motionFlag = False
 
-def newLogDir()
+def newLogDir():
     newDir = True
     dirNum = 1
     while (newDir):
