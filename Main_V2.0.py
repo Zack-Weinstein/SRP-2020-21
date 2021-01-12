@@ -10,24 +10,27 @@ import time
 
 sensitivity = 1.5
 evalInterval = 0.2
+
 motionFlag = False
 chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-resX = 896
-resY = 504
-aResX = 256
-aResY = 144
-chunkX = aResX / 4
-chunkY = aResY / 2
+SRes = [896, 504]
+ARes = [256, 144]
+#resX = 896
+#resY = 504
+#aResX = 256
+#aResY = 144
+chunkX = SRes[1] / 4
+chunkY = SRes[2] / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
-camera.resolution = (resX, resY)
+camera.resolution = (SRes[1], SRes[2])
 camera.framerate = (30)
 ph = 0
 vi = 0
 newDir = True
 dirNum = 1
-rawCapture = PiRGBArray(camera, size=(resX, resY))
+rawCapture = PiRGBArray(camera, size=(SRes[1], SRes[2]))
 while (newDir):
     if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
         dirNum = dirNum + 1
@@ -36,7 +39,7 @@ while (newDir):
         os.mkdir('/home/pi/Desktop/%s' % dirNum)
 
 def capture(type, length):
-    camera.resolution = (resX, resY)
+    camera.resolution = (SRes[1], SRes[2])
     if type == "photo":
         camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph)
     if type == "video":
@@ -51,7 +54,7 @@ def updateValues():
     #camera.resolution = (resX, resY)
     #camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
     im = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    img = cv2.resize(im, (aResX, aResY))
+    img = cv2.resize(im, (ARes[1], aResY))
     print()
     for chunkNum in range(0, 8):
         print("chunk %s" % chunkNum)
