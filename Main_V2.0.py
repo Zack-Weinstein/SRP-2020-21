@@ -6,10 +6,7 @@ import cv2
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import numpy as np
-from multiprocessing import Process
 import time
-
-h = 1
 
 sensitivity = 1.5
 evalInterval = 0.2
