@@ -7,7 +7,7 @@ from picamera import PiCamera
 from picamera.array import PiRGBArray
 import numpy as np
 from multiprocessing import Process
-from time import sleep
+import time
 
 h = 1
 
@@ -100,13 +100,15 @@ def resetCache():
 
 if __name__ == "__main__":
     resetCache()
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):    
-        #capture("photo", 1)
-        image = frame.array
-        updateValues()
-        evaluateData()
-        if motionFlag:
-            saveMedia("photo")
-        resetCache()
-        motionFlag = False
-        #sleep(0.2)
+    lastEvalTime = 0
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):   
+        if time.time() > lastEvalTime +0.2:
+            lastEvalTime = time.time()
+            image = frame.array
+            updateValues()
+            evaluateData()
+            if motionFlag:
+                saveMedia("photo")
+            resetCache()
+            motionFlag = False
+        
