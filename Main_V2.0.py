@@ -10,40 +10,39 @@ import time
 
 sensitivity = 1.5
 evalInterval = 0.2
-
-motionFlag = False
-chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
-lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 SRes = [896, 504]
 ARes = [256, 144]
-#resX = 896
-#resY = 504
-#aResX = 256
-#aResY = 144
+
+chunkData = [0, 0, 0, 0, 0, 0, 0, 0]
+lastChunkData = [0, 0, 0, 0, 0, 0, 0, 0]
 chunkX = ARes[0] / 4
 chunkY = ARes[1] / 2
 chunkPixs = chunkX * chunkY
 camera = PiCamera()
-camera.resolution = (SRes[0], SRes[1])
 camera.framerate = (30)
-ph = 0
-vi = 0
-newDir = True
-dirNum = 1
+camera.resolution = (SRes[0], SRes[1])
 rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
-while (newDir):
-    if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
-        dirNum = dirNum + 1
-    else:
-        newDir = False
-        os.mkdir('/home/pi/Desktop/%s' % dirNum)
+MediaType = [0, 0]
+#ph = 0
+#vi = 0
+motionFlag = False
+
+def newLogDir()
+    newDir = True
+    dirNum = 1
+    while (newDir):
+        if os.path.isdir('/home/pi/Desktop/%s' % dirNum):
+            dirNum = dirNum + 1
+        else:
+            newDir = False
+            os.mkdir('/home/pi/Desktop/%s' % dirNum)
 
 def capture(type, length):
     camera.resolution = (SRes[0], SRes[1])
     if type == "photo":
-        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph)
+        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0])
     if type == "video":
-        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % vi)
+        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1])
         sleep(length)
         camera.stop_recording()
 
@@ -82,24 +81,22 @@ def evaluateData():
         lastChunkData[i] = chunkData[i]
 
 def saveMedia(type):
-    global ph
-    global vi
+    global MediaType[0]
+    global MediaType[1]
     if type == "photo":
-        #shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % ph, '/home/pi/Desktop/%s' % dirNum)
-        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, ph), image)
-        ph = ph + 1
+        cv2.imwrite('/home/pi/Desktop/%s/photo_%s.jpg' % (dirNum, MediaType[0]), image)
+        MediaType[0] = MediaType[0] + 1
     if type == "video":
-        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % vi, '/home/pi/Desktop/%s' % dirNum)
-        vi = vi + 1
-    print("save %s" % ph)
+        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1], '/home/pi/Desktop/%s' % dirNum)
+        MediaType[1] = MediaType[1] + 1
+    print("save %s" % MediaType[0])
 
 def resetCache():
-    #shutil.rmtree('/home/pi/Desktop/Analysis')
-    #os.mkdir('/home/pi/Desktop/Analysis')
     rawCapture.truncate(0)
 
 if __name__ == "__main__":
     resetCache()
+    newLogDir()
     lastEvalTime = 0
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
         currentInterval = time.time() - lastEvalTime
@@ -114,3 +111,11 @@ if __name__ == "__main__":
             print(lastEvalTime)
             print(currentInterval)
         resetCache()
+
+
+
+#shutil.rmtree('/home/pi/Desktop/Analysis')
+#os.mkdir('/home/pi/Desktop/Analysis')
+#camera.resolution = (resX, resY)
+#camera.capture('/home/pi/Desktop/Analysis/photo.jpg')
+#shutil.move('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0], '/home/pi/Desktop/%s' % dirNum)
