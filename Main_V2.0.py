@@ -94,23 +94,22 @@ def resetCache():
     rawCapture.truncate(0)
 
 try:
-    if __name__ == "__main__":
+    resetCache()
+    newLogDir()
+    lastEvalTime = 0
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        currentInterval = time.time() - lastEvalTime
+        if currentInterval > evalInterval:
+            lastEvalTime = time.time()
+            image = frame.array
+            updateValues()
+            evaluateData()
+            if motionFlag:
+                saveMedia("photo")
+            motionFlag = False
+            print(lastEvalTime)
+            print(currentInterval)
         resetCache()
-        newLogDir()
-        lastEvalTime = 0
-        for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-            currentInterval = time.time() - lastEvalTime
-            if currentInterval > evalInterval:
-                lastEvalTime = time.time()
-                image = frame.array
-                updateValues()
-                evaluateData()
-                if motionFlag:
-                    saveMedia("photo")
-                motionFlag = False
-                print(lastEvalTime)
-                print(currentInterval)
-            resetCache()
 except:
     print("\n")
     print("  ** Program End Via Keyboard Interupt **  ")
