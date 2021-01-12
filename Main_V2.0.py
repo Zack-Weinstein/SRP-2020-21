@@ -112,6 +112,7 @@ try:
                 print(currentInterval)
             resetCache()
 except:
+    print("\n")
     print("  ** Program End Via Keyboard Interupt **  ")
 
 
