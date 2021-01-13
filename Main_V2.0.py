@@ -17,7 +17,7 @@ videoBufferLength = 5
 SRes = [1280, 720]
 ARes = [256, 144]
 saveDir = '/home/pi/Desktop/'
-saveType = 'photo'
+saveType = 'video'
 
 # Declaring variables before use
 chunkData = [0] * 8
@@ -89,6 +89,7 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
         MediaType[0] = MediaType[0] + 1
         print("save %s" % MediaType[0])
     if type == "video":
+        saveMedia('photo')
         nowTime = time.time()
         if recording and motionFlag:
             videoSaveEnd = nowTime
