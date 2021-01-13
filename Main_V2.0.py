@@ -52,7 +52,7 @@ def updateValues():         # Updates buffered values for current camera readout
         chunkData[data] = 0
     im = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(im, (ARes[0], ARes[1]))
-print()
+    print()
     for chunkNum in range(0, 8):
         print("chunk %s:" % chunkNum, end = " ")
         if chunkNum < 4:
