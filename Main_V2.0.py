@@ -12,10 +12,11 @@ import time
 # Declaring global variables
 sensitivity = 1.5
 evalInterval = 0.2
-#SRes = [896, 504]
 SRes = [1280, 720]
 ARes = [256, 144]
 saveDir = '/home/pi/Desktop/'
+saveType = 'video'
+videoStop = 10
 
 # Declaring variables before use
 chunkData = [0] * 8
@@ -30,6 +31,8 @@ camera.resolution = (SRes[0], SRes[1])
 rawCapture = PiRGBArray(camera, size=(SRes[0], SRes[1]))
 MediaType = [0, 0]
 motionFlag = False
+videoSaveEnd = 0
+recording = False
 
 def newSaveDir():            # Finds next available save directory
     newDir = True
@@ -76,9 +79,26 @@ def evaluateData():         # Evaluates current buffered data in comparison to t
 
 def saveMedia(type):       # Saves media stored in openCV numpy array
     global MediaType
+    global videoSaveEnd
+    global motionFlag
+    global videoStop
+    global recording
     if type == "photo":
         cv2.imwrite('%s%s/photo_%s.jpg' % (saveDir, dirNum, MediaType[0]), image)
         MediaType[0] = MediaType[0] + 1
+    if type == "video":
+        if recording and motionFlag:
+            videoSaveEnd = 0
+        elif recording:
+            videoSaveEnd = videoSaveEnd + 1
+        elif motionFlag:
+            camera.start_recording('%svideo_%s.h264' % (saveDir, MediaType[1]))
+            recording = True
+        elif videoSaveEnd >= videoStop:
+            camera.stop_recording()
+            recording = False
+            videoSaveEnd = 0
+
     print("save %s" % MediaType[0])
 
 def resetCache():           # Resets openCV stream
@@ -95,8 +115,8 @@ try:
             image = frame.array
             updateValues()
             evaluateData()
-            if motionFlag:
-                saveMedia("photo")
+            if motionFlag or (videoSaveEnd <= videoStop > 0):
+                saveMedia(saveType)
             motionFlag = False
             print("Loop Start: %s" % lastEvalTime)
             print("Loop Time:  %s" % currentInterval)
