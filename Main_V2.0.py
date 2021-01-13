@@ -13,7 +13,7 @@ import time
 # Declaring global variables
 sensitivity = 1.5
 evalInterval = 0.2
-videoBufferLength = 2
+videoBufferLength = 5
 SRes = [1280, 720]
 ARes = [256, 144]
 saveDir = '/home/pi/Desktop/'
