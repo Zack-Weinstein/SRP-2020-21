@@ -93,11 +93,12 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
         elif videoSaveEnd >= videoStop:
             camera.stop_recording()
             recording = False
+            MediaType[1] = MediaType[1] + 1
             videoSaveEnd = 0
         elif recording:
             videoSaveEnd = videoSaveEnd + 1
         elif motionFlag:
-            camera.start_recording('%s%svideo_%s.h264' % (saveDir, dirNum, MediaType[1]))
+            camera.start_recording('%s%s/video_%s.h264' % (saveDir, dirNum, MediaType[1]))
             recording = True
 
     print("save %s" % MediaType[0])
