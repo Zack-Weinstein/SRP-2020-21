@@ -4,6 +4,7 @@
 import os
 import shutil
 import cv2
+from numpy.core.records import record
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import numpy as np
@@ -89,15 +90,15 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
     if type == "video":
         if recording and motionFlag:
             videoSaveEnd = 0
-        elif recording:
-            videoSaveEnd = videoSaveEnd + 1
-        elif motionFlag:
-            camera.start_recording('%svideo_%s.h264' % (saveDir, MediaType[1]))
-            recording = True
         elif videoSaveEnd >= videoStop:
             camera.stop_recording()
             recording = False
             videoSaveEnd = 0
+        elif recording:
+            videoSaveEnd = videoSaveEnd + 1
+        elif motionFlag:
+            camera.start_recording('%s%svideo_%s.h264' % (saveDir, dirNum, MediaType[1]))
+            recording = True
 
     print("save %s" % MediaType[0])
 
@@ -115,7 +116,7 @@ try:
             image = frame.array
             updateValues()
             evaluateData()
-            if motionFlag or (videoSaveEnd <= videoStop > 0):
+            if motionFlag or recording:
                 saveMedia(saveType)
             motionFlag = False
             print("Loop Start: %s" % lastEvalTime)
