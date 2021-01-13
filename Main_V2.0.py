@@ -82,7 +82,6 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
     global MediaType
     global videoSaveEnd
     global motionFlag
-    global videoStop
     global recording
     if type == "photo":
         cv2.imwrite('%s%s/photo_%s.jpg' % (saveDir, dirNum, MediaType[0]), image)
