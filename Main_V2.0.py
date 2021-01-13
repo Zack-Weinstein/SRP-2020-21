@@ -13,7 +13,7 @@ import time
 # Declaring global variables
 sensitivity = 1.5
 evalInterval = 0.2
-videoBufferLength = 5
+videoBufferLength = 2
 SRes = [1280, 720]
 ARes = [256, 144]
 saveDir = '/home/pi/Desktop/'
@@ -25,7 +25,6 @@ lastChunkData = [0] * 8
 chunkX = ARes[0] / 4
 chunkY = ARes[1] / 2
 chunkPixs = chunkX * chunkY
-#videoStop = videoBufferLength / evalInterval
 camera = PiCamera()
 camera.framerate = (30)
 camera.rotation = 180
@@ -93,16 +92,16 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
         nowTime = time.time()
         if recording and motionFlag:
             videoSaveEnd = nowTime
-        elif (videoSaveEnd + videoBufferLength <= nowTime) and recording == True:
+        elif ((videoSaveEnd + videoBufferLength) <= nowTime) and recording:
             camera.stop_recording()
             recording = False
             MediaType[1] = MediaType[1] + 1
-            videoSaveEnd = nowTime
         elif recording:
             pass
         elif motionFlag:
             camera.start_recording('%s%s/video_%s.h264' % (saveDir, dirNum, MediaType[1]))
             recording = True
+            videoSaveEnd = nowTime
         print("save %s" % MediaType[1])
 
 def resetCache():           # Resets openCV stream
