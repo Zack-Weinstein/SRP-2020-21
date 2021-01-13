@@ -17,7 +17,7 @@ SRes = [1280, 720]
 ARes = [256, 144]
 saveDir = '/home/pi/Desktop/'
 saveType = 'video'
-videoStop = 10
+videoStop = 50
 
 # Declaring variables before use
 chunkData = [0] * 8
@@ -87,6 +87,7 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
     if type == "photo":
         cv2.imwrite('%s%s/photo_%s.jpg' % (saveDir, dirNum, MediaType[0]), image)
         MediaType[0] = MediaType[0] + 1
+        print("save %s" % MediaType[0])
     if type == "video":
         if recording and motionFlag:
             videoSaveEnd = 0
@@ -100,8 +101,7 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
         elif motionFlag:
             camera.start_recording('%s%s/video_%s.h264' % (saveDir, dirNum, MediaType[1]))
             recording = True
-
-    print("save %s" % MediaType[0])
+        print("save %s" % MediaType[1])
 
 def resetCache():           # Resets openCV stream
     rawCapture.truncate(0)
