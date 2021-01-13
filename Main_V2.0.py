@@ -93,7 +93,7 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
         nowTime = time.time()
         if recording and motionFlag:
             videoSaveEnd = nowTime
-        elif (videoSaveEnd + videoBufferLength <= nowTime) and recording == False:
+        elif (videoSaveEnd + videoBufferLength <= nowTime) and recording == True:
             camera.stop_recording()
             recording = False
             MediaType[1] = MediaType[1] + 1
