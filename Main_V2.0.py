@@ -41,15 +41,6 @@ def newSaveDir():            # Finds next available save directory
             newDir = False
             os.mkdir('%s%s' % (saveDir, dirNum))
 
-#def capture(type, length):  # Captures specified type of media
-#    camera.resolution = (SRes[0], SRes[1])
-#    if type == "photo":
-#        camera.capture('/home/pi/Desktop/Analysis/photo_%s.jpg' % MediaType[0])
-#    if type == "video":
-#        camera.start_recording('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1])
-#        sleep(length)
-#        camera.stop_recording()
-
 def updateValues():         # Updates buffered values for current camera readout
     global image
     for data in range(0, 8):
@@ -87,9 +78,6 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
     if type == "photo":
         cv2.imwrite('%s%s/photo_%s.jpg' % (saveDir, dirNum, MediaType[0]), image)
         MediaType[0] = MediaType[0] + 1
-    if type == "video":
-        shutil.move('/home/pi/Desktop/Analysis/video_%s.h264' % MediaType[1], '/home/pi/Desktop/%s' % dirNum)
-        MediaType[1] = MediaType[1] + 1
     print("save %s" % MediaType[0])
 
 def resetCache():           # Resets openCV stream
