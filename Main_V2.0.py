@@ -128,4 +128,4 @@ try:
                 print("Loop Time:  %s" % currentInterval)
         resetCache()
 except:
-    print("\n  ** Program End Via Keyboard Interupt **  ")
+    print("\n\n  ** Program End Via Keyboard Interupt **  ")
