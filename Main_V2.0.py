@@ -17,7 +17,7 @@ videoBufferLength = 5
 SRes = [1280, 720]
 ARes = [256, 144]
 saveDir = '/home/pi/Desktop/'
-saveType = 'video'
+saveType = 'photo'
 
 # Declaring variables before use
 chunkData = [0] * 8
