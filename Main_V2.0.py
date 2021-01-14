@@ -128,5 +128,4 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
             print("Loop Time:  %s" % currentInterval)
     resetCache()
 #except:
-#    print("\n")
-#    print("  ** Program End Via Keyboard Interupt **  ")
+#    print("\n  ** Program End Via Keyboard Interupt **  ")
