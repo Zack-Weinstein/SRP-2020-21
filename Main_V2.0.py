@@ -112,10 +112,15 @@ resetCache()
 newSaveDir()
 lastEvalTime = 0
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    print('1')
     currentInterval = round(time.time() - lastEvalTime, 2)
+    print('2')
     if currentInterval >= evalInterval:
+        print('3')
         lastEvalTime = round(time.time(), 2)
+        print('4')
         image = frame.array
+        print('5')
         updateValues()
         evaluateData()
         if motionFlag or recording:
