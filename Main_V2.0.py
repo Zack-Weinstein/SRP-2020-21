@@ -107,25 +107,25 @@ def saveMedia(type):       # Saves media stored in openCV numpy array
 def resetCache():           # Resets openCV stream
     rawCapture.truncate(0)
 
-#try:
-resetCache()
-newSaveDir()
-lastEvalTime = 0
-for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-    loop = True
-    while loop:
-        currentInterval = round(time.time() - lastEvalTime, 2)
-        if currentInterval >= evalInterval:
-            loop = False
-            lastEvalTime = round(time.time(), 2)
-            image = frame.array
-            updateValues()
-            evaluateData()
-            if motionFlag or recording:
-                saveMedia(saveType)
-            motionFlag = False
-            print("Loop Start: %s" % lastEvalTime)
-            print("Loop Time:  %s" % currentInterval)
+try:
     resetCache()
-#except:
-#    print("\n  ** Program End Via Keyboard Interupt **  ")
+    newSaveDir()
+    lastEvalTime = 0
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        loop = True
+        while loop:
+            currentInterval = round(time.time() - lastEvalTime, 2)
+            if currentInterval >= evalInterval:
+                loop = False
+                lastEvalTime = round(time.time(), 2)
+                image = frame.array
+                updateValues()
+                evaluateData()
+                if motionFlag or recording:
+                    saveMedia(saveType)
+                motionFlag = False
+                print("Loop Start: %s" % lastEvalTime)
+                print("Loop Time:  %s" % currentInterval)
+        resetCache()
+except:
+    print("\n  ** Program End Via Keyboard Interupt **  ")
