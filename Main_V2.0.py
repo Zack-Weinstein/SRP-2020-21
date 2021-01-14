@@ -114,16 +114,11 @@ lastEvalTime = 0
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     loop = True
     while loop:
-        print('1 %s' % time.time())
         currentInterval = round(time.time() - lastEvalTime, 2)
-        print('2 %s' % time.time())
         if currentInterval >= evalInterval:
             loop = False
-            print('3 %s' % time.time())
             lastEvalTime = round(time.time(), 2)
-            print('4 %s' % time.time())
             image = frame.array
-            print('5 %s' % time.time())
             updateValues()
             evaluateData()
             if motionFlag or recording:
