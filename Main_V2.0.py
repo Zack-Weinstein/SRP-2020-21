@@ -16,7 +16,7 @@ evalInterval = 0.25
 videoBufferLength = 5
 SRes = [1280, 720]
 ARes = [256, 144]
-saveDir = '/home/pi/Desktop/'
+saveDir = '/home/zack/Desktop/'
 saveType = 'photo'
 
 # Declaring variables before use
